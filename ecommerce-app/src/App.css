@@ -15,7 +15,7 @@ a {
 }
 
 nav {
-  background-color: #ffffff;
+  background-color: #324994;
   padding: 15px 30px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   display: flex;
@@ -29,7 +29,8 @@ nav {
 nav a {
   margin: 0 15px;
   font-weight: 500;
-  color: #850e0e;
+  color: #fff;
+  font-weight: bold;
 }
 
 nav button {
@@ -47,9 +48,12 @@ nav button:hover {
 }
 
 .container {
+  display: grid;
+  grid-template-rows: auto auto;
   max-width: 1100px;
   margin: 40px auto;
   padding: 0 20px;
+  place-items: center;
 }
 
 h2, h3 {
@@ -99,4 +103,22 @@ button:hover {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: flex-start;
+}
+
+.home{
+  /* display: grid; */
+  /* grid-template-c: auto auto; */
+  /* place-items: center; */
+  position: absolute;
+  left: 50rem;
+  top: 20rem;
+  /* overflow: none; */
+}
+.home > *{
+  text-align: center;
+  font-weight: bolder;
+}
+
+.home > h2{
+  color: #2563eb;
 }

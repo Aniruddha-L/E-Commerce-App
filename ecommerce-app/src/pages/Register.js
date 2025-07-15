@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Register = () => {
+const Register = ({ setIsLoggedIn }) => {
   const [user, setUser] = useState({ username: '', password: '' });
   const [msg, setMsg] = useState('');
 
   const handleRegister = async () => {
     try {
+      if (user.password.length === 0 )return setMsg("Password is empty");
+      if (user.password.length < 6) return setMsg("Minimum length of the password should be 6");
       const res = await axios.post('http://localhost:5000/register', user);
       setMsg(res.data.message);
+      // Optionally log in the user after registration
+      if (res.data.success) {
+        localStorage.setItem('loggedInUser', user.username);
+        setIsLoggedIn(true);
+      }
     } catch (err) {
       setMsg(err.response?.data?.message || 'Registration failed');
     }

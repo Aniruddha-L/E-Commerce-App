@@ -18,7 +18,7 @@ const Dashboard = () => {
   <div className="product-grid">
     {products.map(product => (
       <div key={product.id} className="product-card">
-        <img src={product.image} alt={product.name} width="150" />
+        <img src={product.image} alt={product.name} width="150" height='150' />
         <h4>{product.name}</h4>
         <p>₹{product.price}</p>
         <button onClick={() => addToCart(product)}>Add to Cart</button>

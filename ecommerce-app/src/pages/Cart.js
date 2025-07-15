@@ -51,7 +51,7 @@ const Cart = () => {
           <button
             onClick={() => setShowInvoice(true)}
             style={{
-              marginTop: '10px',
+              marginTop: '20px',
               marginLeft: '10px',
               backgroundColor: '#2563eb'
             }}

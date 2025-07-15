@@ -1,5 +1,6 @@
 [
   { "id": 1, "name": "Smartphone", "price": 69999, "image":"/images/smartphone.jpg" },
   { "id": 2, "name": "Headphones", "price": 1199, "image": "/images/headphones.jpg" },
-  { "id": 3, "name": "Laptop", "price": 74999, "image": "/images/laptop.jpg" }
+  { "id": 3, "name": "Desktop", "price": 74999, "image": "/images/laptop.jpg" },
+  { "id": 4, "name": "GPU", "price": 174999, "image": "/images/gpu.png" }
 ]

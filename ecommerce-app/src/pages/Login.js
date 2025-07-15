@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const navigate = useNavigate();
+  const [msg, setMsg] = useState()
 
   const handleLogin = async () => {
     try {
+      if (credentials.password.length === 0) return setMsg("Password is empty");
+      if (credentials.password.length < 6) return setMsg("Minimum password length should be 6")
       const res = await axios.post('http://localhost:5000/login', credentials);
       localStorage.setItem('loggedInUser', res.data.username);
+      setIsLoggedIn(true);
       alert('Login successful!');
       navigate('/dashboard');
     } catch (err) {
@@ -23,6 +27,7 @@ const Login = () => {
       <input placeholder="Username" onChange={e => setCredentials({ ...credentials, username: e.target.value })} />
       <input type="password" placeholder="Password" onChange={e => setCredentials({ ...credentials, password: e.target.value })} />
       <button onClick={handleLogin}>Login</button>
+      <p>{msg}</p>
     </div>
   );
 };
