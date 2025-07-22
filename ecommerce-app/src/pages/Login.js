@@ -6,6 +6,7 @@ const Login = ({ setIsLoggedIn }) => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const navigate = useNavigate();
   const [msg, setMsg] = useState()
+  const [password, showPassword] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -14,10 +15,9 @@ const Login = ({ setIsLoggedIn }) => {
       const res = await axios.post('http://localhost:5000/login', credentials);
       localStorage.setItem('loggedInUser', res.data.username);
       setIsLoggedIn(true);
-      alert('Login successful!');
       navigate('/dashboard');
     } catch (err) {
-      alert(err.response?.data?.message || 'Login failed');
+      setMsg(err.response?.data?.message || 'Login failed');
     }
   };
 
@@ -25,8 +25,10 @@ const Login = ({ setIsLoggedIn }) => {
     <div className="container">
       <h2>Login</h2>
       <input placeholder="Username" onChange={e => setCredentials({ ...credentials, username: e.target.value })} />
-      <input type="password" placeholder="Password" onChange={e => setCredentials({ ...credentials, password: e.target.value })} />
+      <input type={password ? "text" : "password"} placeholder="Password" onChange={e => setCredentials({ ...credentials, password: e.target.value })} />
+      <button onClick={() => showPassword(!password)}>Show Password</button>
       <button onClick={handleLogin}>Login</button>
+      <button onClick={() => navigate('/register')}>Register</button>
       <p>{msg}</p>
     </div>
   );

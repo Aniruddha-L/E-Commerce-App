@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import products from '../data/products.json';
 
-const Dashboard = () => {
+const Dashboard = ({status}) => {
   const username = localStorage.getItem('loggedInUser');
-
-  const addToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    cart.push(product);
+  const navigate = useNavigate();
+  const [cart, setCart] = useState(false);
+  const addToCart = async (product) => {
+    if (!status) {
+      localStorage.setItem('pendingProduct', JSON.stringify(product));
+      navigate('/login');
+      return;
+    }
+    const pendingProduct = JSON.parse(localStorage.getItem('pendingProduct'));
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  
+    if (pendingProduct) {
+      cart.push(pendingProduct);
+      localStorage.removeItem('pendingProduct'); 
+    }
+    if (!pendingProduct || pendingProduct.id !== product.id) {
+      cart.push(product);
+    }
+  
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Added to cart');
+    setCart(true);
   };
+  
 
   return (
     <div className="container">
-  <h2>Hello, {username}</h2>
+  {status ? <h2>Hello, {username}</h2> : <h2>Please login to continue</h2>}
   <h3>Our Products</h3>
+  {cart && <h3>Item added to cart</h3>}
   <div className="product-grid">
     {products.map(product => (
       <div key={product.id} className="product-card">

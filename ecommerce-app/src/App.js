@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import React, { useState } from 'react';
-import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -16,10 +15,10 @@ const App = () => {
       <Router>
         <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Dashboard status={isLoggedIn}/>} />
           <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
+          <Route path="/dashboard" element={<Dashboard status={isLoggedIn}/>} />
           <Route path="/cart" element={isLoggedIn ? <Cart /> : <Navigate to="/login" />} />
         </Routes>
       </Router>
