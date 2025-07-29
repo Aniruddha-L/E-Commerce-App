@@ -4,12 +4,23 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+console.log('Starting server...');
+
 const app = express();
 const PORT = 5000;
 const USERS_FILE = path.join(__dirname, 'users.json');
+const CARTS_FILE = path.join(__dirname, 'carts.json');
+
+console.log('Files:', { USERS_FILE, CARTS_FILE });
 
 app.use(cors());
 app.use(bodyParser.json());
+
+// Initialize carts.json if it doesn't exist
+if (!fs.existsSync(CARTS_FILE)) {
+  console.log('Creating carts.json file...');
+  fs.writeFileSync(CARTS_FILE, JSON.stringify({}, null, 2));
+}
 
 app.post('/register', (req, res) => {
   const { username, password } = req.body;
@@ -33,6 +44,109 @@ app.post('/login', (req, res) => {
   res.json({ message: 'Login successful', username });
 });
 
+// Get user's cart
+app.get('/cart/:username', (req, res) => {
+  const { username } = req.params;
+  let carts = JSON.parse(fs.readFileSync(CARTS_FILE, 'utf-8'));
+  
+  if (!carts[username]) {
+    carts[username] = [];
+    
+  }
+  
+  res.json(carts[username]);
+});
+
+// Add item to cart
+app.post('/cart/:username/add', (req, res) => {
+  const { username } = req.params;
+  const { product, quantity = 1 } = req.body;
+  
+  let carts = JSON.parse(fs.readFileSync(CARTS_FILE, 'utf-8'));
+  
+  if (!carts[username]) {
+    carts[username] = [];
+  }
+  
+  // Check if product already exists in cart
+  const existingItemIndex = carts[username].findIndex(item => item.id === product.id);
+  
+  if (existingItemIndex !== -1) {
+    // Update quantity of existing item
+    carts[username][existingItemIndex].quantity += quantity;
+  } else {
+    // Add new item with quantity
+    carts[username].push({
+      ...product,
+      quantity: quantity
+    });
+  }
+  
+  fs.writeFileSync(CARTS_FILE, JSON.stringify(carts, null, 2));
+  res.json(carts[username]);
+});
+
+// Update item quantity in cart
+app.put('/cart/:username/update', (req, res) => {
+  const { username } = req.params;
+  const { productId, quantity } = req.body;
+  
+  let carts = JSON.parse(fs.readFileSync(CARTS_FILE, 'utf-8'));
+  
+  if (!carts[username]) {
+    return res.status(404).json({ message: 'Cart not found' });
+  }
+  
+  const itemIndex = carts[username].findIndex(item => item.id === productId);
+  
+  if (itemIndex === -1) {
+    return res.status(404).json({ message: 'Item not found in cart' });
+  }
+  
+  if (quantity <= 0) {
+    // Remove item if quantity is 0 or negative
+    carts[username].splice(itemIndex, 1);
+  } else {
+    // Update quantity
+    carts[username][itemIndex].quantity = quantity;
+  }
+  
+  fs.writeFileSync(CARTS_FILE, JSON.stringify(carts, null, 2));
+  res.json(carts[username]);
+});
+
+// Remove item from cart
+app.delete('/cart/:username/remove/:productId', (req, res) => {
+  const { username, productId } = req.params;
+  
+  let carts = JSON.parse(fs.readFileSync(CARTS_FILE, 'utf-8'));
+  
+  if (!carts[username]) {
+    return res.status(404).json({ message: 'Cart not found' });
+  }
+  
+  carts[username] = carts[username].filter(item => item.id !== parseInt(productId));
+  
+  fs.writeFileSync(CARTS_FILE, JSON.stringify(carts, null, 2));
+  res.json(carts[username]);
+});
+
+// Clear user's cart
+app.delete('/cart/:username/clear', (req, res) => {
+  const { username } = req.params;
+  
+  let carts = JSON.parse(fs.readFileSync(CARTS_FILE, 'utf-8'));
+  
+  if (carts[username]) {
+    carts[username] = [];
+    fs.writeFileSync(CARTS_FILE, JSON.stringify(carts, null, 2));
+  }
+  
+  res.json({ message: 'Cart cleared successfully' });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+
+console.log('Server setup complete');
