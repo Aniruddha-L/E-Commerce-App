@@ -1,6 +1,6 @@
 [
-  { "id": 1, "name": "Smartphone", "price": 69999, "image":"/images/smartphone.jpg" },
-  { "id": 2, "name": "Headphones", "price": 1199, "image": "/images/headphones.jpg" },
-  { "id": 3, "name": "Desktop", "price": 74999, "image": "/images/laptop.jpg" },
-  { "id": 4, "name": "GPU", "price": 174999, "image": "/images/gpu.png" }
+  { "id": 1,"category":"Mobile Phone","Description":"A new Apple iPhone 16 Pro Max with A18 chip, 6.9 display, Pro camera system, iOS 18, and titanium build.", "name": "Apple Iphone 16 pro max", "price": 69999, "image":"/images/smartphone.jpg" },
+  { "id": 2, "category":"Headphone","Description":"Premium wireless Headphone with adaptive noise cancellation, high-resolution audio support, and up to 13 hours battery life.", "name": "Sony WX1000", "price": 1199, "image": "/images/headphones.jpg" },
+  { "id": 3,"category":"PC","Description":"Sleek 15.6\" Full HD laptop with Intel Core i7, 16GB RAM, 1TB SSD, and Windows 11.",  "name": "HP Pavillion Notebook 15", "price": 74999, "image": "/images/laptop.jpg" },
+  { "id": 4, "category":"Component","Description":"32GB GDDR7 VRAM, 21,760 CUDA cores, DLSS 4, 4K gaming, PCIe 5.0, 575W TDP.", "name": "Nvidia RTX 6090", "price": 174999, "image": "/images/gpu.png" }
 ]

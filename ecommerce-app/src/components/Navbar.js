@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie'
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const handleLogout = () => {
-    localStorage.removeItem('loggedInUser');
     localStorage.removeItem('cart');
     setIsLoggedIn(false);
     window.location.href = '/';
+    Cookies.remove('user')
   };
 
   return (

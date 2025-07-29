@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from "js-cookie"
 
 const Login = ({ setIsLoggedIn }) => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -13,7 +14,8 @@ const Login = ({ setIsLoggedIn }) => {
       if (credentials.password.length === 0) return setMsg("Password is empty");
       if (credentials.password.length < 6) return setMsg("Minimum password length should be 6")
       const res = await axios.post('http://localhost:5000/login', credentials);
-      localStorage.setItem('loggedInUser', res.data.username);
+      // localStorage.setItem('loggedInUser', res.data.username);
+      Cookies.set('user', res.data.username)
       setIsLoggedIn(true);
       navigate('/dashboard');
     } catch (err) {

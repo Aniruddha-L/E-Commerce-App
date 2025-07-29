@@ -6,9 +6,10 @@ import Dashboard from './pages/Dashboard';
 import Cart from './pages/Cart';
 import Navbar from './components/Navbar';
 import './App.css';
+import Cookies from 'js-cookie'
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('loggedInUser'));
+  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('user'));
 
   return (
     <div>
