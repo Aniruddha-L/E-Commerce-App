@@ -1,5 +1,15 @@
 {
-  "Aniruddha": [],
+  "Aniruddha": [
+    {
+      "id": 1,
+      "category": "Mobile Phone",
+      "Description": "A new Apple iPhone 16 Pro Max with A18 chip, 6.9 display, Pro camera system, iOS 18, and titanium build.",
+      "name": "Apple Iphone 16 pro max",
+      "price": 69999,
+      "image": "/images/smartphone.jpg",
+      "quantity": 1
+    }
+  ],
   "davidarmstrong": [
     {
       "id": 1,
@@ -111,5 +121,6 @@
   "allisonalexis": [],
   "meghan13": [],
   "raymondsmith": [],
-  "xleach": []
+  "xleach": [],
+  "testuser": []
 }

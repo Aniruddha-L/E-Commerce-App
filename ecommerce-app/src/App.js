@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
 import Navbar from './components/Navbar';
 import './App.css';
 import Cookies from 'js-cookie'
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/dashboard" element={<Dashboard status={isLoggedIn}/>} />
           <Route path="/cart" element={isLoggedIn ? <Cart /> : <Navigate to="/login" />} />
+          <Route path="/checkout" element={isLoggedIn ? <Checkout /> : <Navigate to="/login" />} />
         </Routes>
       </Router>
     </div>

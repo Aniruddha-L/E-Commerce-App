@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import products from '../data/products.json';
 import Cookies from 'js-cookie';
@@ -15,6 +15,10 @@ const Dashboard = ({ status }) => {
   const [visibleDescId, setVisibleDescId] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState(products);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const searchTimeout = useRef(null);
 
   // Fetch cart items from backend when component mounts
   useEffect(() => {
@@ -41,9 +45,11 @@ const Dashboard = ({ status }) => {
   };
 
   const addToCart = async (product) => {
+    // Remove login redirect from addToCart
     if (!status) {
-      localStorage.setItem('pendingProduct', JSON.stringify(product));
-      navigate('/login');
+      setToastMessage('Please login to add items to cart.');
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
       return;
     }
 
@@ -166,8 +172,41 @@ const Dashboard = ({ status }) => {
     );
   };
 
+  useEffect(() => {
+    if (searchTimeout.current) clearTimeout(searchTimeout.current);
+    setSearchLoading(true);
+    searchTimeout.current = setTimeout(() => {
+      if (searchTerm.length < 4) {
+        setSearchResults(products);
+        setSearchLoading(false);
+        return;
+      }
+      // Simulate async search
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(products.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase())));
+        }, 400); // Simulate network delay
+      }).then(results => {
+        setSearchResults(results);
+        setSearchLoading(false);
+      });
+    }, 350);
+    return () => clearTimeout(searchTimeout.current);
+  }, [searchTerm, products]);
+
   return (
-    <div className="container">
+    <div className="container" style={{ position: 'relative' }}>
+      {/* Search Bar */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 10, background: 'white', boxShadow: '0 2px 8px rgba(0,0,0,0.07)', padding: '16px 0' }}>
+        <input
+          type="text"
+          placeholder="Search products (min 4 letters)"
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          style={{ width: '100%', padding: '8px', fontSize: '16px', marginBottom: 0 }}
+        />
+      </div>
+      <div style={{ height: 70 }} /> {/* Spacer for search bar */}
       {status ? <h2>Hello, {username}</h2> : <h2>Please login to continue</h2>}
       <h3>Our Products</h3>
       {cart && <h3 style={{ color: '#28a745' }}>Item added to cart</h3>}
@@ -182,7 +221,16 @@ const Dashboard = ({ status }) => {
       </div>
       
       <div className="product-grid">
-        {products.map((product) => (
+        {searchLoading && (
+          <p style={{ color: '#2563eb', gridColumn: '1/-1', textAlign: 'center', width: '100%' }}>Searching...</p>
+        )}
+        {searchResults.length < products.length && searchTerm.length < 4 && !searchLoading && (
+          <p style={{ color: 'red' }}>Enter at least 4 letters to search.</p>
+        )}
+        {searchResults.length === 0 && searchTerm.length >= 4 && !searchLoading && (
+          <p style={{ color: 'gray', gridColumn: '1/-1', textAlign: 'center', width: '100%' }}>No products found</p>
+        )}
+        {searchResults.map((product) => (
           <div key={product.id} className="product-card">
             <img
               src="/info.png"

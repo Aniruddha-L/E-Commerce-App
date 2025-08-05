@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [showInvoice, setShowInvoice] = useState(false);
   const username = Cookies.get('user');
+  const navigate = useNavigate();
+  const isLoggedIn = !!Cookies.get('user');
 
   useEffect(() => {
     if (username) {
@@ -147,9 +150,27 @@ const Cart = () => {
             Clear All
           </button>
 
-          {/* ✅ Generate Invoice Button */}
           <button
-            onClick={() => setShowInvoice(true)}
+            onClick={() => {
+              if (!isLoggedIn) {
+                navigate('/login');
+              } else {
+                navigate('/checkout');
+              }
+            }}
+            style={{ marginTop: '10px', marginLeft: '10px', backgroundColor: '#22c55e', color: 'white' }}
+          >
+            Checkout
+          </button>
+
+          <button
+            onClick={() => {
+              if (!isLoggedIn) {
+                navigate('/login');
+              } else {
+                setShowInvoice(true);
+              }
+            }}
             style={{
               marginTop: '20px',
               marginLeft: '10px',
