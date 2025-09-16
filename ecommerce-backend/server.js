@@ -10,8 +10,9 @@ const app = express();
 const PORT = 5000;
 const USERS_FILE = path.join(__dirname, 'users.json');
 const CARTS_FILE = path.join(__dirname, 'carts.json');
+const ORDERS_FILE = path.join(__dirname, 'orders.json');
 
-console.log('Files:', { USERS_FILE, CARTS_FILE });
+console.log('Files:', { USERS_FILE, CARTS_FILE, ORDERS_FILE });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -22,12 +23,21 @@ if (!fs.existsSync(CARTS_FILE)) {
   fs.writeFileSync(CARTS_FILE, JSON.stringify({}, null, 2));
 }
 
+// Initialize orders.json if it doesn't exist
+if (!fs.existsSync(ORDERS_FILE)) {
+  console.log('Creating orders.json file...');
+  fs.writeFileSync(ORDERS_FILE, JSON.stringify({}, null, 2));
+}
+
 app.post('/register', (req, res) => {
+  if (!req.body || !req.body.username || !req.body.password) {
+    return res.status(400).json({ message: 'Invalid request body', data: req.body });
+  }
   const { username, password } = req.body;
   let users = JSON.parse(fs.readFileSync(USERS_FILE, 'utf-8'));
 
   const exists = users.find(user => user.username === username);
-  console.log(password.lenght);
+  console.log(password.length);
   if (exists) return res.status(400).json({ message: 'User already exists' });
   users.push({ username, password });
   fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
@@ -145,8 +155,36 @@ app.delete('/cart/:username/clear', (req, res) => {
   res.json({ message: 'Cart cleared successfully' });
 });
 
+// Get user's order history
+app.get('/orders/:username', (req, res) => {
+  const { username } = req.params;
+  let orders = {};
+  if (fs.existsSync(ORDERS_FILE)) {
+    orders = JSON.parse(fs.readFileSync(ORDERS_FILE, 'utf-8'));
+  }
+  res.json(orders[username] || []);
+});
+
+// Add new order for user
+app.post('/orders/:username', (req, res) => {
+  const { username } = req.params;
+  const newOrder = req.body;
+  let orders = {};
+  if (fs.existsSync(ORDERS_FILE)) {
+    orders = JSON.parse(fs.readFileSync(ORDERS_FILE, 'utf-8'));
+  }
+  if (!orders[username]) {
+    orders[username] = [];
+  }
+  orders[username].push(newOrder);
+  fs.writeFileSync(ORDERS_FILE, JSON.stringify(orders, null, 2));
+  res.json({ message: 'Order saved', order: newOrder });
+});
+
+app.get('/', (req, res) => {
+  res.send('E-commerce Backend is running');
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
-
-console.log('Server setup complete');

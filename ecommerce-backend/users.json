@@ -1,42 +1,30 @@
 [
   {
-    "username": "Aniruddha",
-    "password": "123456"
-  },
-  {
-    "username": "Aniruddha.L",
-    "password": "123456789"
-  },
-  {
-    "username": "testuser4451",
-    "password": "password123"
-  },
-  {
     "username": "testuser",
     "password": "password123"
   },
   {
-    "username": "testuser2316",
-    "password": "password123"
+    "username": "Aniruddha",
+    "password": "654321"
   },
   {
-    "username": "testuser6944",
-    "password": "password123"
+    "username": "unituser",
+    "password": "unitpass123"
   },
   {
-    "username": "testuser9899",
-    "password": "password123"
+    "username": "testuse1r",
+    "password": "testpass"
   },
   {
-    "username": "testuser4674",
-    "password": "password123"
+    "username": "user1",
+    "password": "pass1"
   },
   {
-    "username": "testuser9197",
-    "password": "password123"
+    "username": "user2",
+    "password": "pass1"
   },
   {
-    "username": "testuser9486",
-    "password": "password123"
+    "username": "user110",
+    "password": "pass1"
   }
 ]

@@ -1,126 +1,24 @@
 {
-  "Aniruddha": [
+  "testuser": [
     {
-      "id": 1,
-      "category": "Mobile Phone",
-      "Description": "A new Apple iPhone 16 Pro Max with A18 chip, 6.9 display, Pro camera system, iOS 18, and titanium build.",
-      "name": "Apple Iphone 16 pro max",
-      "price": 69999,
-      "image": "/images/smartphone.jpg",
-      "quantity": 1
+      "0": "L",
+      "1": "a",
+      "2": "p",
+      "3": "t",
+      "4": "o",
+      "5": "p",
+      "quantity": 4
     }
   ],
-  "davidarmstrong": [
+  "user1": [
     {
-      "id": 1,
-      "name": "Test Product",
-      "price": 100,
-      "category": "Electronics",
-      "image": "test-image.jpg",
-      "Description": "Test product",
       "quantity": 1
-    }
-  ],
-  "dianariggs": [
+    },
     {
-      "id": 1,
-      "name": "Test Product",
-      "price": 100,
-      "category": "Electronics",
-      "image": "test-image.jpg",
-      "Description": "Test product",
-      "quantity": 1
+      "id": 123,
+      "name": "Laptop",
+      "price": 45000,
+      "quantity": 2
     }
-  ],
-  "andrea68": [
-    {
-      "id": 1,
-      "name": "Test Product",
-      "price": 100,
-      "category": "Electronics",
-      "image": "test-image.jpg",
-      "Description": "Test product",
-      "quantity": 1
-    }
-  ],
-  "petersonbrian": [
-    {
-      "id": 1,
-      "name": "Test Product",
-      "price": 100,
-      "category": "Electronics",
-      "image": "test-image.jpg",
-      "Description": "Test product",
-      "quantity": 1
-    }
-  ],
-  "anthonygarcia": [
-    {
-      "id": 1,
-      "name": "Test Product",
-      "price": 100,
-      "category": "Electronics",
-      "image": "test-image.jpg",
-      "Description": "Test product",
-      "quantity": 1
-    }
-  ],
-  "patricia43": [],
-  "allenjohn": [],
-  "qpatterson": [],
-  "cgray": [],
-  "sanchezangel": [
-    {
-      "id": 1,
-      "name": "Test Product",
-      "price": 100,
-      "category": "Electronics",
-      "image": "test-image.jpg",
-      "Description": "Test product",
-      "quantity": 1
-    }
-  ],
-  "kkim": [],
-  "wendybailey": [],
-  "chapmanalex": [],
-  "steven99": [],
-  "lnelson": [
-    {
-      "id": 1,
-      "name": "Test Product",
-      "price": 100,
-      "category": "Electronics",
-      "image": "test-image.jpg",
-      "Description": "Test product",
-      "quantity": 1
-    }
-  ],
-  "brycejones": [],
-  "chavezcourtney": [],
-  "uburgess": [],
-  "pperez": [],
-  "james49": [],
-  "tracie30": [],
-  "deborahholmes": [],
-  "toddwashington": [],
-  "mike15": [],
-  "hardinjames": [],
-  "robertbaker": [],
-  "mcdanielandrew": [],
-  "brandon96": [],
-  "dwayne20": [],
-  "lloydkatherine": [],
-  "rhondaterrell": [],
-  "brianmartin": [],
-  "sandovalmelissa": [],
-  "stacey25": [],
-  "rcastillo": [],
-  "curtisamy": [],
-  "wwright": [],
-  "mitchelltyler": [],
-  "allisonalexis": [],
-  "meghan13": [],
-  "raymondsmith": [],
-  "xleach": [],
-  "testuser": []
+  ]
 }

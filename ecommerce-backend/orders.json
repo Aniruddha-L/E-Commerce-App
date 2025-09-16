@@ -1,0 +1,97 @@
+{
+  "aniruddha": [
+    {
+      "id": 1,
+      "items": [
+        {
+          "name": "Apple Iphone 16 pro max",
+          "quantity": 1,
+          "price": 69999
+        },
+        {
+          "name": "Sony WX1000",
+          "quantity": 2,
+          "price": 1199
+        }
+      ],
+      "totalAmount": 72397,
+      "status": "Delivered",
+      "deliveryDate": "2025-08-01"
+    },
+    {
+      "id": 2,
+      "items": [
+        {
+          "name": "HP Pavillion Notebook 15",
+          "quantity": 1,
+          "price": 74999
+        }
+      ],
+      "totalAmount": 74999,
+      "status": "Placed",
+      "deliveryDate": "2025-09-05"
+    }
+  ],
+  "john": [
+    {
+      "id": 1,
+      "items": [
+        {
+          "name": "Nvidia RTX 6090",
+          "quantity": 1,
+          "price": 174999
+        }
+      ],
+      "totalAmount": 174999,
+      "status": "Delivered",
+      "deliveryDate": "2025-08-28"
+    }
+  ],
+  "Aniruddha": [
+    {
+      "id": 1757992652965,
+      "items": [
+        {
+          "name": "Apple Iphone 16 pro max",
+          "quantity": 1,
+          "price": 69999
+        }
+      ],
+      "totalAmount": 69999,
+      "status": "Placed",
+      "deliveryDate": "18/09/2025",
+      "address1": "abc",
+      "address2": "acb",
+      "city": "acb",
+      "state": "abc",
+      "pincode": "123",
+      "contact": "123"
+    }
+  ],
+  "testuser": [
+    null,
+    null,
+    {
+      "productId": "12345",
+      "quantity": 2
+    },
+    {
+      "productId": "12345",
+      "quantity": 2
+    },
+    {
+      "productId": "12345",
+      "quantity": 2
+    },
+    {
+      "orderId": "ORD001",
+      "items": [
+        {
+          "productId": "12345",
+          "product": "Laptop",
+          "quantity": 2
+        }
+      ]
+    }
+  ]
+}
