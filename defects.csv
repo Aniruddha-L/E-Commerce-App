@@ -1,0 +1,11 @@
+Defect ID,Defect Description,Location
+D001,Login page does not validate empty fields,Login Page
+D002,Cart does not update quantity correctly,Cart Page
+D003,Order history fails to load for some users,Dashboard Page
+D004,Product images not loading,Product Details Page
+D005,Checkout button not responsive,Checkout Page
+D006,Search returns incorrect results,Search Bar
+D007,Registration allows duplicate emails,Register Page
+D008,UI misalignment on mobile devices,All Pages
+D009,Logout does not clear session,Header
+D010,Error message not displayed for failed payment,Payment Page

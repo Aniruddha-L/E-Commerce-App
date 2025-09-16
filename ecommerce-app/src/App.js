@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import OrderSummary from './pages/OrderSummary';
+import OrderHistory from './pages/OrderHistory';
 import Navbar from './components/Navbar';
 import './App.css';
 import Cookies from 'js-cookie'
@@ -23,6 +25,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard status={isLoggedIn}/>} />
           <Route path="/cart" element={isLoggedIn ? <Cart /> : <Navigate to="/login" />} />
           <Route path="/checkout" element={isLoggedIn ? <Checkout /> : <Navigate to="/login" />} />
+          <Route path="/order-summary" element={<OrderSummary />} />
         </Routes>
       </Router>
     </div>
